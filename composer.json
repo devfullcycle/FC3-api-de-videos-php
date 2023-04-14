@@ -6,10 +6,17 @@
             "email": "carlos@fullcycle.com.br"
         }
     ],
-    "require": {},
     "autoload": {
         "psr-4": {
             "Core\\": "src/Core/"
+        }
+    },
+    "require-dev": {
+        "pestphp/pest": "^2.5"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
         }
     }
 }
