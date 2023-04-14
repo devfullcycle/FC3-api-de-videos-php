@@ -12,11 +12,15 @@
         }
     },
     "require-dev": {
-        "pestphp/pest": "^2.5"
+        "pestphp/pest": "^2.5",
+        "mockery/mockery": "^1.5"
     },
     "config": {
         "allow-plugins": {
             "pestphp/pest-plugin": true
         }
+    },
+    "scripts": {
+        "test": "./vendor/bin/pest"
     }
 }
