@@ -22,5 +22,8 @@
     },
     "scripts": {
         "test": "./vendor/bin/pest"
+    },
+    "require": {
+        "ramsey/uuid": "^4.7"
     }
 }

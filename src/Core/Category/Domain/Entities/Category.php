@@ -8,6 +8,7 @@ class Category
 {
     public function __construct(
         protected string $name,
+        protected ?string $id = null,
         protected ?string $description = null,
         protected bool $isActive = true,
         protected ?DateTime $createdAt = null,
