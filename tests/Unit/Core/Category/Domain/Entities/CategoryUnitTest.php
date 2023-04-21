@@ -8,6 +8,13 @@ beforeEach(fn () => $this->category = new Category(
 ));
 
 test('constructor of category and getters and setters', function () {
+    expect($this->category)->toHaveProperties([
+        'id',
+        'name',
+        'description',
+        'isActive',
+        'createdAt',
+    ]);
     expect($this->category->name)->not->toBeNull();
     expect($this->category->name)->toBeString();
     expect($this->category->name)->toBe('test');
