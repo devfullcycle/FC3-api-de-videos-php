@@ -2,7 +2,9 @@
 
 use DateTime;
 use Core\Category\Domain\Entities\Category;
+use Core\SeedWork\Domain\Exceptions\EntityValidationException;
 use Core\SeedWork\Domain\ValueObjects\Uuid;
+use Faker\Factory;
 
 beforeEach(fn () => $this->category = new Category(
     name: 'test'
@@ -58,3 +60,17 @@ test('id field', function () {
     expect($category->id())->toBeString();
     expect($category->id)->toBe($id);
 });
+
+test('should throw exception with name is invalid - min characters', function () {
+    new Category(name: 'sd');
+})->throws(EntityValidationException::class);
+
+test('should throw exception with name is invalid - max characters', function () {
+    $name = Factory::create()->sentence(400);
+    new Category(name: $name);
+})->throws(EntityValidationException::class);
+
+test('should throw exception with description is invalid - max characters', function () {
+    $description = Factory::create()->sentence(4000);
+    new Category(name: 'valid name', description: $description);
+})->throws(EntityValidationException::class);
