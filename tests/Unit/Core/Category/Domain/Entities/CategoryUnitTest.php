@@ -94,3 +94,33 @@ test('should disable a category', function () {
     $category->disable();
     expect($category->isActive)->toBeFalsy();
 });
+
+test('should update a category', function () {
+    $category = new Category(
+        name: 'test',
+        description: 'desc',
+    );
+    $category->update(
+        name: 'updated name',
+        description: 'updated desc',
+    );
+    expect($category->name)->toBe('updated name');
+    expect($category->description)->toBe('updated desc');
+
+    $category->update(
+        name: 'updated name (2)',
+    );
+    expect($category->name)->toBe('updated name (2)');
+    expect($category->description)->toBe('updated desc');
+});
+
+test('should throw exception if update with invalid value', function () {
+    $category = new Category(
+        name: 'test',
+        description: 'desc',
+    );
+    $category->update(
+        name: 'up',
+        description: 'updated desc',
+    );
+})->throws(EntityValidationException::class);

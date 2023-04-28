@@ -46,6 +46,14 @@ class Category
         $this->isActive = false;
     }
 
+    public function update(string $name, string $description = null): void
+    {
+        $this->name = $name;
+        $this->description = $description ?? $this->description;
+
+        $this->validate();
+    }
+
     private function validate()
     {
         DomainValidation::strMinLength($this->name);
