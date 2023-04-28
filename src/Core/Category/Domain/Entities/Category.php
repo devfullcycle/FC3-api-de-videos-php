@@ -36,6 +36,16 @@ class Category
         return (string) $this->id;
     }
 
+    public function activate(): void
+    {
+        $this->isActive = true;
+    }
+
+    public function disable(): void
+    {
+        $this->isActive = false;
+    }
+
     private function validate()
     {
         DomainValidation::strMinLength($this->name);

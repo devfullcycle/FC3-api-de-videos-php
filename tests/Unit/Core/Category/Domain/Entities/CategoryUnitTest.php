@@ -74,3 +74,23 @@ test('should throw exception with description is invalid - max characters', func
     $description = Factory::create()->sentence(4000);
     new Category(name: 'valid name', description: $description);
 })->throws(EntityValidationException::class);
+
+test('should active a category', function () {
+    $category = new Category(
+        name: 'test',
+        isActive: false,
+    );
+    expect($category->isActive)->toBeFalsy();
+    $category->activate();
+    expect($category->isActive)->toBeTrue();
+});
+
+test('should disable a category', function () {
+    $category = new Category(
+        name: 'test',
+        isActive: true,
+    );
+    expect($category->isActive)->toBeTrue();
+    $category->disable();
+    expect($category->isActive)->toBeFalsy();
+});
