@@ -29,3 +29,15 @@ test('should string and total characters with custom message error', function ()
     $value = Factory::create()->sentence(300);
     DomainValidation::strMaxLength(value: $value, customMessage: 'custom error message');
 })->throws(EntityValidationException::class, 'custom error message');
+
+test('should string and total min characters', function () {
+    DomainValidation::strMinLength(value: 'ab');
+})->throws(EntityValidationException::class, 'The value must be at least 3 characters');
+
+test('should string and total min characters with custom size', function () {
+    DomainValidation::strMinLength(value: 'abc', length: 5);
+})->throws(EntityValidationException::class, 'The value must be at least 5 characters');
+
+test('should string and total min characters with custom message error', function () {
+    DomainValidation::strMinLength(value: 'ab', customMessage: 'custom error message');
+})->throws(EntityValidationException::class, 'custom error message');
