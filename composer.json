@@ -24,6 +24,7 @@
         "test": "./vendor/bin/pest"
     },
     "require": {
-        "ramsey/uuid": "^4.7"
+        "ramsey/uuid": "^4.7",
+        "fakerphp/faker": "^1.21"
     }
 }
