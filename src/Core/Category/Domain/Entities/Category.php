@@ -2,12 +2,15 @@
 
 namespace Core\Category\Domain\Entities;
 
+use Core\SeedWork\Domain\Traits\MethodsMagicsTrait;
 use Core\SeedWork\Domain\Validators\DomainValidation;
 use Core\SeedWork\Domain\ValueObjects\Uuid;
 use DateTime;
 
 class Category
 {
+    use MethodsMagicsTrait;
+
     public function __construct(
         protected string $name,
         protected ?Uuid $id = null,
@@ -19,21 +22,6 @@ class Category
         $this->createdAt = $this->createdAt ?? new DateTime();
 
         $this->validate();
-    }
-
-    public function __get($name)
-    {
-        return $this->{$name};
-    }
-
-    public function createdAt(): string
-    {
-        return (string) $this->createdAt->format('Y-m-d H:i:s');
-    }
-
-    public function id(): string
-    {
-        return (string) $this->id;
     }
 
     public function activate(): void
