@@ -12,4 +12,11 @@ class DomainValidation
             throw new EntityValidationException($customMessage ?? 'Should not be empty');
         }
     }
+
+    public static function strMaxLength(string $value = null, int $length = 255, string $customMessage = null)
+    {
+        if (strlen($value) > $length) {
+            throw new EntityValidationException($customMessage ?? "The value must not be greater than {$length} characters");
+        }
+    }
 }
