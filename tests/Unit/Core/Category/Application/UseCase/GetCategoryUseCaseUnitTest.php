@@ -11,6 +11,8 @@ use Mockery;
 use stdClass;
 use Core\SeedWork\Domain\ValueObjects\Uuid;
 
+afterAll(fn () => Mockery::close());
+
 test('unit test get category', function () {
     // $category = new Category(
     //     name: 'test'
