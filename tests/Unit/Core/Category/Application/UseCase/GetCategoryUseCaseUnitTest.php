@@ -22,13 +22,16 @@ test('unit test get category', function () {
     ]);
     $categoryMock->shouldReceive('id')->andReturn((string)$uuid);
     $categoryMock->shouldReceive('createdAt')->andReturn(date('Y-m-d H:i:s'));
-    
-    $mockRepository = Mockery::mock(stdClass::class, CategoryRepositoryInterface::class);
-    $mockRepository->shouldReceive('findOne')->andReturn($categoryMock);
 
     $inputDto = new InputCategoryDTO(
         id: '1231'
     );
+    
+    $mockRepository = Mockery::mock(stdClass::class, CategoryRepositoryInterface::class);
+    $mockRepository->shouldReceive('findOne')
+                    ->times(1)
+                    ->with($inputDto->id)
+                    ->andReturn($categoryMock);
 
     $useCase = new GetCategoryUseCase($mockRepository);
     $response = $useCase->execute(input: $inputDto);
