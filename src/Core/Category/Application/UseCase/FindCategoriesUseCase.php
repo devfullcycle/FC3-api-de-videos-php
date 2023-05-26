@@ -19,10 +19,7 @@ class FindCategoriesUseCase
     {
         $categories = $this->repository->findAll($input->filter);
 
-        $items = [];
-        foreach ($categories as $category) {
-            array_push($items, OutputCategoryDTO::fromEntity($category));
-        }
+        $items = array_map(fn ($category) => OutputCategoryDTO::fromEntity($category), $categories);
 
         return new OutputCategoriesDTO(
             items: $items,
