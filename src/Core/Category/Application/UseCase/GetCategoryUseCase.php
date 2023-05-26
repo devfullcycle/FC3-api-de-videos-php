@@ -18,12 +18,6 @@ class GetCategoryUseCase
     {
         $category = $this->repository->findOne($input->id);
 
-        return new OutputCategoryDTO(
-            id: $category->id(),
-            name: $category->name,
-            description: $category->description ?? '',
-            is_active: $category->isActive,
-            created_at: $category->createdAt(),
-        );
+        return OutputCategoryDTO::fromEntity($category);
     }
 }

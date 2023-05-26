@@ -21,13 +21,7 @@ class FindCategoriesUseCase
 
         $items = [];
         foreach ($categories as $category) {
-            array_push($items, new OutputCategoryDTO(
-                id: $category->id(),
-                name: $category->name,
-                description: $category->description ?? '',
-                is_active: $category->isActive,
-                created_at: $category->createdAt(),
-            ));
+            array_push($items, OutputCategoryDTO::fromEntity($category));
         }
 
         return new OutputCategoriesDTO(
