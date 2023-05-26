@@ -14,15 +14,17 @@ test('unit test get categories', function () {
         filter: 'abc'
     );
 
+    $responseRepository = [
+        new Category(
+            name: 'test'
+        ),
+    ];
+
     $mockRepository = Mockery::mock(stdClass::class, CategoryRepositoryInterface::class);
     $mockRepository->shouldReceive('findAll')
                     ->times(1)
                     ->with($inputDto->filter)
-                    ->andReturn([
-                        new Category(
-                            name: 'test'
-                        ),
-                    ]);
+                    ->andReturn($responseRepository);
 
     $useCase = new FindCategoriesUseCase(
         repository: $mockRepository,
@@ -32,5 +34,8 @@ test('unit test get categories', function () {
     );
 
     expect($response)->toBeInstanceOf(OutputCategoriesDTO::class);
-
+    expect($response->items)->toBeArray();
+    expect($response->items)->toBe($responseRepository);
+    expect($response->total)->toBeInt();
+    expect($response->total)->toBe(1);
 });

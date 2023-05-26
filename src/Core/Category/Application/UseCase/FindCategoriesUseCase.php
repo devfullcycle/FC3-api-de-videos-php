@@ -16,11 +16,11 @@ class FindCategoriesUseCase
 
     public function execute(InputCategoriesDTO $input): OutputCategoriesDTO
     {
-        $this->repository->findAll($input->filter);
+        $categories = $this->repository->findAll($input->filter);
 
         return new OutputCategoriesDTO(
-            items: [],
-            total: 0,
+            items: $categories,
+            total: count($categories),
         );
     }
 }
