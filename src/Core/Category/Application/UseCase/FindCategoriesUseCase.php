@@ -2,6 +2,10 @@
 
 namespace Core\Category\Application\UseCase;
 
+use Core\Category\Application\DTO\{
+    InputCategoriesDTO,
+    OutputCategoriesDTO,
+};
 use Core\Category\Domain\Repository\CategoryRepositoryInterface;
 
 class FindCategoriesUseCase
@@ -10,8 +14,11 @@ class FindCategoriesUseCase
         protected CategoryRepositoryInterface $repository,
     ) {}
 
-    public function execute()
+    public function execute(InputCategoriesDTO $input): OutputCategoriesDTO
     {
-        
+        return new OutputCategoriesDTO(
+            items: [],
+            total: 0,
+        );
     }
 }

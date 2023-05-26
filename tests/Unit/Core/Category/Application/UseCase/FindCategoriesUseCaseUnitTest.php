@@ -1,10 +1,17 @@
 <?php
 
+use Core\Category\Application\DTO\{
+    InputCategoriesDTO,
+    OutputCategoriesDTO,
+};
 use Core\Category\Application\UseCase\FindCategoriesUseCase;
 use Core\Category\Domain\Repository\CategoryRepositoryInterface;
 use Mockery;
 
 test('unit test get categories', function () {
+    $inputDto = new InputCategoriesDTO(
+        filter: ''
+    );
 
     $mockRepository = Mockery::mock(stdClass::class, CategoryRepositoryInterface::class);
     $mockRepository->shouldReceive('findAll');
@@ -15,8 +22,10 @@ test('unit test get categories', function () {
     $useCase = new FindCategoriesUseCase(
         repository: $mockRepository,
     );
-    $useCase->execute();
+    $response = $useCase->execute(
+        input: $inputDto,
+    );
 
-    expect(true)->toBe(true);
+    expect($response)->toBeInstanceOf(OutputCategoriesDTO::class);
 
 });
