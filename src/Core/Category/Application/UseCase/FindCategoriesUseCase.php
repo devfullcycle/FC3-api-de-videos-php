@@ -5,6 +5,7 @@ namespace Core\Category\Application\UseCase;
 use Core\Category\Application\DTO\{
     InputCategoriesDTO,
     OutputCategoriesDTO,
+    OutputCategoryDTO,
 };
 use Core\Category\Domain\Repository\CategoryRepositoryInterface;
 
@@ -18,8 +19,19 @@ class FindCategoriesUseCase
     {
         $categories = $this->repository->findAll($input->filter);
 
+        $items = [];
+        foreach ($categories as $category) {
+            array_push($items, new OutputCategoryDTO(
+                id: $category->id(),
+                name: $category->name,
+                description: $category->description ?? '',
+                is_active: $category->isActive,
+                created_at: $category->createdAt(),
+            ));
+        }
+
         return new OutputCategoriesDTO(
-            items: $categories,
+            items: $items,
             total: count($categories),
         );
     }

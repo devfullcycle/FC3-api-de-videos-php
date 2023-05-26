@@ -3,6 +3,7 @@
 use Core\Category\Application\DTO\{
     InputCategoriesDTO,
     OutputCategoriesDTO,
+    OutputCategoryDTO,
 };
 use Core\Category\Application\UseCase\FindCategoriesUseCase;
 use Core\Category\Domain\Repository\CategoryRepositoryInterface;
@@ -35,7 +36,9 @@ test('unit test get categories', function () {
 
     expect($response)->toBeInstanceOf(OutputCategoriesDTO::class);
     expect($response->items)->toBeArray();
-    expect($response->items)->toBe($responseRepository);
+    foreach ($response->items as $item) {
+        expect($item)->toBeInstanceOf(OutputCategoryDTO::class);
+    }
     expect($response->total)->toBeInt();
     expect($response->total)->toBe(1);
 });
