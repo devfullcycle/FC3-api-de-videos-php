@@ -1,0 +1,34 @@
+version: "3.7"
+
+services:
+    # image project
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        restart: unless-stopped
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www
+        depends_on:
+            - redis
+        extra_hosts:
+            - "host.docker.internal:172.17.0.1"
+
+    # nginx
+    nginx:
+        image: nginx:alpine
+        restart: unless-stopped
+        ports:
+            - "81:80"
+        volumes:
+            - ./:/var/www
+            - ./docker/nginx/:/etc/nginx/conf.d/
+        extra_hosts:
+            - "host.docker.internal:172.17.0.1"
+
+    # redis
+    redis:
+        image: redis:latest
+        extra_hosts:
+            - "host.docker.internal:172.17.0.1"
