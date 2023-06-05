@@ -33,6 +33,10 @@ RUN pecl install -o -f redis \
     &&  rm -rf /tmp/pear \
     &&  docker-php-ext-enable redis
 
+# Enable xDebug
+RUN pecl install xdebug && docker-php-ext-enable xdebug && \
+    echo "xdebug.mode=coverage" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
 # Set working directory
 WORKDIR /var/www
 
