@@ -4,6 +4,8 @@ namespace Core\Category\Infra;
 
 use Core\Category\Domain\Entities\Category;
 use Core\Category\Domain\Repository\CategoryRepositoryInterface;
+use Core\SeedWork\Domain\ValueObjects\Uuid;
+use DateTime;
 use Elasticsearch\Client;
 
 class CategoryRepository implements CategoryRepositoryInterface
@@ -50,7 +52,22 @@ class CategoryRepository implements CategoryRepositoryInterface
         }
 
         $response = $this->client->search($this->params);
+        $categories = array_map(
+            fn ($item) => $this->createEntity($item['_source']['after']),
+            $response['hits']['hits']
+        );
 
-        return $response;
+        return $categories;
+    }
+
+    private function createEntity(array $data): Category
+    {
+        return new Category(
+            name: $data['name'],
+            id: new Uuid($data['id']),
+            description: $data['description'] ?? '',
+            isActive: (bool) $data['is_active'],
+            createdAt: new DateTime($data['created_at'])
+        );
     }
 }
