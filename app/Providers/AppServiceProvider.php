@@ -15,9 +15,11 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(Client::class, function () {
             return ClientBuilder::create()
-                ->setHosts(['elasticsearch:9200'])
-                ->setBasicAuthentication('elastic', 'defaultpassword')
-                ->build();
+                ->setHosts(config('elasticsearch.hosts'))
+                ->setBasicAuthentication(
+                    config('elasticsearch.authentication.username'),
+                    config('elasticsearch.authentication.password'),
+                )->build();
         });
     }
 

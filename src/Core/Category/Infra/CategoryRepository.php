@@ -5,17 +5,17 @@ namespace Core\Category\Infra;
 use Core\Category\Domain\Entities\Category;
 use Core\Category\Domain\Repository\CategoryRepositoryInterface;
 use Elasticsearch\Client;
-use Elasticsearch\ClientBuilder;
 
 class CategoryRepository implements CategoryRepositoryInterface
 {
-    protected array $params = [
-        'index' => 'mysql-server.fullcycle.categories',
-    ];
+    protected array $params;
 
     public function __construct(
         protected Client $client,
     ) {
+        $this->params['index'] = [
+            'index' => config('elasticsearch.prefix_index') . 'categories',
+        ];
     }
 
     public function findOne(string $id): Category
