@@ -4,6 +4,7 @@ namespace Core\Category\Infra;
 
 use Core\Category\Domain\Entities\Category;
 use Core\Category\Domain\Repository\CategoryRepositoryInterface;
+use Core\SeedWork\Domain\Exceptions\EntityNotFoundException;
 use Core\SeedWork\Domain\ValueObjects\Uuid;
 use DateTime;
 use Elasticsearch\Client;
@@ -33,7 +34,7 @@ class CategoryRepository implements CategoryRepositoryInterface
         $response = $this->client->search($this->params);
 
         if (!$data = $response['hits']['hits'][0]['_source']['after'] ?? null) {
-            throw new \Exception('Entity not found');
+            throw new EntityNotFoundException("Entity not found ({$id})");
         }
 
         return $this->createEntity($data);
