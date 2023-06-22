@@ -31,9 +31,12 @@ class CategoryRepository implements CategoryRepositoryInterface
         ];
 
         $response = $this->client->search($this->params);
-        dd($response);
 
-        throw new \Exception('Not implemented');
+        if (!$data = $response['hits']['hits'][0]['_source']['after'] ?? null) {
+            throw new \Exception('Entity not found');
+        }
+
+        return $this->createEntity($data);
     }
 
     /**
