@@ -9,18 +9,13 @@ use Elasticsearch\ClientBuilder;
 
 class CategoryRepository implements CategoryRepositoryInterface
 {
-    protected Client $client;
-
     protected array $params = [
         'index' => 'mysql-server.fullcycle.categories',
     ];
 
-    public function __construct()
-    {
-        $this->client = ClientBuilder::create()
-            ->setHosts(['elasticsearch:9200'])
-            ->setBasicAuthentication('elastic', 'defaultpassword')
-            ->build();
+    public function __construct(
+        protected Client $client,
+    ) {
     }
 
     public function findOne(string $id): Category
