@@ -22,7 +22,7 @@
   </php>
   <source>
     <include>
-      <directory suffix=".php">./app</directory>
+      <directory suffix=".php">./src/Core</directory>
     </include>
   </source>
 </phpunit>
