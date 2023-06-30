@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 return [
     'route' => [
@@ -82,7 +82,7 @@ return [
             ],
             // The types only available in this schema
             'types' => [
-                // ExampleType::class,
+                'Category' => \App\GraphQL\Types\CategoryType::class,
             ],
 
             // Laravel HTTP middleware
