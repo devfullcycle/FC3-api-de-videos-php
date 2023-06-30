@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Drives\ElasticDrive;
+use App\Drivers\ElasticDrive;
 use Core\Category\Domain\Repository\CategoryRepositoryInterface;
 use Core\Category\Infra\CategoryRepository;
 use Core\Category\Infra\Contracts\ElasticClientInterface;
@@ -27,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
             ElasticClientInterface::class,
             ElasticDrive::class,
         );
+
         $this->app->singleton(
             CategoryRepositoryInterface::class,
             CategoryRepository::class

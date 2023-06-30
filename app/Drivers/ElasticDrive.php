@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Drives;
+namespace App\Drivers;
 
 use Core\Category\Infra\Contracts\ElasticClientInterface;
 use Elasticsearch\Client;
