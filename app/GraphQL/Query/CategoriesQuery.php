@@ -24,10 +24,21 @@ class CategoriesQuery extends Query
         return Type::listOf(GraphQL::type('Category'));
     }
 
+    public function args(): array
+    {
+        return [
+            'name' => [
+                'name' => 'name',
+                'type' => Type::string(),
+                // 'rules' => ['required'],
+            ]
+        ];
+    }
+
     public function resolve($root, $args)
     {
         $response = $this->useCase->execute(
-            new InputCategoriesDTO(filter: ''),
+            new InputCategoriesDTO(filter: $args['name'] ?? ''),
         );
 
         return $response->items;
