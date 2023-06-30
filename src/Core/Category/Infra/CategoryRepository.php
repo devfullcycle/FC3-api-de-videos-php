@@ -4,17 +4,17 @@ namespace Core\Category\Infra;
 
 use Core\Category\Domain\Entities\Category;
 use Core\Category\Domain\Repository\CategoryRepositoryInterface;
+use Core\Category\Infra\Contracts\ElasticClientInterface;
 use Core\SeedWork\Domain\Exceptions\EntityNotFoundException;
 use Core\SeedWork\Domain\ValueObjects\Uuid;
 use DateTime;
-use Elasticsearch\Client;
 
 class CategoryRepository implements CategoryRepositoryInterface
 {
     protected array $params;
 
     public function __construct(
-        protected Client $client,
+        protected ElasticClientInterface $client,
     ) {
         $this->params['index'] = [
             'index' => config('elasticsearch.prefix_index') . 'categories',
