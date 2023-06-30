@@ -76,6 +76,7 @@ return [
         'default' => [
             'query' => [
                 'categories' => \App\GraphQL\Query\CategoriesQuery::class,
+                'category' => \App\GraphQL\Query\CategoryQuery::class,
             ],
             'mutation' => [
                 // ExampleMutation::class,
