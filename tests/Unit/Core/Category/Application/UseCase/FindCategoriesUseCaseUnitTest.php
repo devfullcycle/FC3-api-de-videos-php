@@ -7,7 +7,6 @@ use Core\Category\Application\DTO\{
 };
 use Core\Category\Application\UseCase\FindCategoriesUseCase;
 use Core\Category\Domain\Repository\CategoryRepositoryInterface;
-use Mockery;
 use Core\Category\Domain\Entities\Category;
 
 test('unit test get categories', function () {
@@ -23,9 +22,9 @@ test('unit test get categories', function () {
 
     $mockRepository = Mockery::mock(stdClass::class, CategoryRepositoryInterface::class);
     $mockRepository->shouldReceive('findAll')
-                    ->times(1)
-                    ->with($inputDto->filter)
-                    ->andReturn($responseRepository);
+        ->times(1)
+        ->with($inputDto->filter)
+        ->andReturn($responseRepository);
 
     $useCase = new FindCategoriesUseCase(
         repository: $mockRepository,

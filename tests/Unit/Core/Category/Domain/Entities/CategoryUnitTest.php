@@ -1,6 +1,5 @@
 <?php
 
-use DateTime;
 use Core\Category\Domain\Entities\Category;
 use Core\SeedWork\Domain\Exceptions\EntityValidationException;
 use Core\SeedWork\Domain\ValueObjects\Uuid;
