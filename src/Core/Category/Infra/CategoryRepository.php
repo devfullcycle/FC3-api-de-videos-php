@@ -16,9 +16,7 @@ class CategoryRepository implements CategoryRepositoryInterface
     public function __construct(
         protected ElasticClientInterface $client,
     ) {
-        $this->params['index'] = [
-            'index' => config('elasticsearch.prefix_index') . 'categories',
-        ];
+        $this->params['index'] = 'mysql-server.fullcycle.categories';
     }
 
     public function findOne(string $id): Category
