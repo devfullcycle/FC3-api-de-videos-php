@@ -26,4 +26,13 @@ class ElasticDrive implements ElasticClientInterface
     {
         return $this->client->search($params);
     }
+
+    public function createIndex(string $name, array $body, bool $refresh = true)
+    {
+        $this->client->index([
+            'index' => $name,
+            'refresh' => $refresh,
+            'body' => $body,
+        ]);
+    }
 }
