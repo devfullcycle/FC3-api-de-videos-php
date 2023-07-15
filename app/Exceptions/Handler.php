@@ -2,7 +2,12 @@
 
 namespace App\Exceptions;
 
+use Core\SeedWork\Domain\Exceptions\{
+    EntityNotFoundException,
+    EntityValidationException
+};
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Response;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -44,5 +49,25 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $e)
+    {
+        if ($e instanceof EntityNotFoundException) {
+            return $this->showError($e->getMessage(), Response::HTTP_NOT_FOUND);
+        }
+
+        if ($e instanceof EntityValidationException) {
+            return $this->showError($e->getMessage(), Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        parent::render($request, $e);
+    }
+
+    private function showError(string $message, int $statusCode)
+    {
+        return response()->json([
+            'message' => $message,
+        ], $statusCode);
     }
 }
