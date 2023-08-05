@@ -1,5 +1,7 @@
 <?php
 
 test('example', function () {
-    expect(true)->toBeTrue();
+    $this->getJson('/')->assertOk();
+    // $response->assertStatus(200);
+    // $response->assertOk();
 });
