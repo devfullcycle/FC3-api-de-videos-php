@@ -38,3 +38,9 @@ test('category api e2e: list single category', function () {
     expect($response['data']['is_active'])->toBeTrue();
     expect($response['data']['created_at'])->toBe('2023-06-22 14:26:57');
 });
+
+test('category api e2e: not found', function () {
+    $response = $this->getJson('/categories/fake_id');
+    // $response->assertStatus(404);
+    $response->assertNotFound();
+});
