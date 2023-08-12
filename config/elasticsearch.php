@@ -8,7 +8,7 @@ return [
     'prefix_index' => 'mysql-server.fullcycle.',
 
     'authentication' => [
-        'username' => env('ELASTICSEARCH_USERNAME'),
-        'password' => env('ELASTICSEARCH_PASSWORD'),
+        'username' => env('ELASTICSEARCH_USERNAME', ''),
+        'password' => env('ELASTICSEARCH_PASSWORD', ''),
     ]
 ];
