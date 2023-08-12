@@ -50,7 +50,7 @@ class ImportDataElasticSearch extends Command
                 $content[$key] = $value;
             }
             $this->elasticClient->createIndex(
-                'import-' . $index,
+                $index,
                 ['after' => $content]
             );
         }
