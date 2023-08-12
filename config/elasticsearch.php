@@ -2,7 +2,7 @@
 
 return [
     'hosts' => [
-        'elasticsearch:9200',
+        env('ELASTICSEARCH_HOST', 'elasticsearch:9200'),
     ],
 
     'prefix_index' => 'mysql-server.fullcycle.',
