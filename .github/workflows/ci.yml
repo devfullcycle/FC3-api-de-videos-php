@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [ci]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      elasticsearch:
+        image: elasticsearch:6.8.3
+        ports:
+          - 9200/tcp
+        options: -e="discovery.type=single-node" --health-cmd="curl http://localhost:9200/_cluster/health" --health-interval=10s --health-timeout=5s --health-retries=10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.1"
+
+      - name: Install Dependencies
+        run: composer install
+
+      - name: Configure Environment Variables
+        run: cp .env.example .env
+
+      - name: Verify Elasticsearch connection from host
+        env:
+          ELASTIC_SEARCH_URL: http://localhost:${{ job.services.elasticsearch.ports[9200] }}
+        run: |
+          echo $ELASTIC_SEARCH_URL
+          curl -fsSL "$ELASTIC_SEARCH_URL/_cat/health?h=status"
+
+      - name: Import Data to elasticsearch
+        env:
+          ELASTICSEARCH_HOST: http://localhost:${{ job.services.elasticsearch.ports[9200] }}
+        run: |
+          php artisan app:import-data-elastic-search mysql-server.fullcycle.categories
+          php artisan app:import-data-elastic-search mysql-server.fullcycle.genres
+          php artisan app:import-data-elastic-search mysql-server.fullcycle.cast_members
+          php artisan app:import-data-elastic-search mysql-server.fullcycle.videos
+
+      - name: Run Tests
+        env:
+          ELASTICSEARCH_HOST: http://localhost:${{ job.services.elasticsearch.ports[9200] }}
+        run: php artisan test
