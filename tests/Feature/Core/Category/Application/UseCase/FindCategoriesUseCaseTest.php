@@ -20,6 +20,11 @@ test('FindCategoriesUseCase', function (array $response, int $totalResponse = 0)
                 ]
             ];
         }
+
+        public function createIndex(string $name, array $body, bool $refresh = true)
+        {
+            throw new \Exception('not implemented');
+        }
     };
 
     $repository = new CategoryRepository($stubElastic);

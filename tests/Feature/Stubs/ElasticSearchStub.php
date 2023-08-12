@@ -15,4 +15,9 @@ class ElasticSearchStub implements ElasticClientInterface
     {
         return $this->dataResponse;
     }
+
+    public function createIndex(string $name, array $body, bool $refresh = true)
+    {
+        echo 'index_created';
+    }
 }
