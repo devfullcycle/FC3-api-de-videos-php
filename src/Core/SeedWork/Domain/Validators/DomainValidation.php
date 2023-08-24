@@ -3,6 +3,7 @@
 namespace Core\SeedWork\Domain\Validators;
 
 use Core\SeedWork\Domain\Exceptions\EntityValidationException;
+use Core\SeedWork\Domain\ValueObjects\Uuid;
 
 class DomainValidation
 {
@@ -31,6 +32,13 @@ class DomainValidation
     {
         if (!empty($value) && strlen($value) > $length) {
             throw new EntityValidationException($customMessage ?? "The value must not be greater than {$length} characters");
+        }
+    }
+
+    public static function arrayTypeItemsUuid(array $items = [])
+    {
+        foreach ($items as $item) {
+            new Uuid($item);
         }
     }
 }

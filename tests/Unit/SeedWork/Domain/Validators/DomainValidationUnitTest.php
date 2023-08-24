@@ -3,6 +3,7 @@
 use Faker\Factory;
 use Core\SeedWork\Domain\Exceptions\EntityValidationException;
 use Core\SeedWork\Domain\Validators\DomainValidation;
+use Core\SeedWork\Domain\ValueObjects\Uuid;
 
 test('should throw exception if value is null', function () {
     DomainValidation::notNull(value: null);
@@ -59,3 +60,19 @@ test('should throw exception value not null and total characters is invalid and 
 test('should throw exception value not null and total characters is invalid and custom length and custom message error', function () {
     DomainValidation::strCanNullAndMaxLength(value: 'abc', length: 2, customMessage: 'custom message error');
 })->throws(EntityValidationException::class, 'custom message error');
+
+test('should throw exception when the value arrays not is uuid v.o.', function () {
+    DomainValidation::arrayTypeItemsUuid([
+        '123',
+        123
+    ]);
+})->throws(\InvalidArgumentException::class);
+
+test('should pass when value from array is valid', function () {
+    DomainValidation::arrayTypeItemsUuid([
+        (string) Uuid::random(),
+        (string) Uuid::random(),
+    ]);
+
+    expect(true)->toBe(true);
+});
