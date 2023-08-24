@@ -43,7 +43,7 @@ it('constructor of genre and getters and setters', function () {
     expect($genre->createdAt())->not->toBeNull();
 });
 
-test('id field', function () {
+it('id field', function () {
     expect($this->genre->id)->not->toBeString();
     expect($this->genre->id)->not->toBeNull();
     expect($this->genre->id)->toBeInstanceOf(Uuid::class);
@@ -61,16 +61,16 @@ test('id field', function () {
     expect($genre->id)->toBe($id);
 });
 
-test('should throw exception with name is invalid - min characters', function () {
+it('should throw exception with name is invalid - min characters', function () {
     new Genre(name: 'sd');
 })->throws(EntityValidationException::class);
 
-test('should throw exception with name is invalid - max characters', function () {
+it('should throw exception with name is invalid - max characters', function () {
     $name = Factory::create()->sentence(400);
     new Genre(name: $name);
 })->throws(EntityValidationException::class);
 
-test('should active a genre', function () {
+it('should active a genre', function () {
     $genre = new Genre(
         name: 'test',
         isActive: false,
@@ -80,7 +80,7 @@ test('should active a genre', function () {
     expect($genre->isActive)->toBeTrue();
 });
 
-test('should deactivate a genre', function () {
+it('should deactivate a genre', function () {
     $genre = new Genre(
         name: 'test',
         isActive: true,
@@ -90,7 +90,7 @@ test('should deactivate a genre', function () {
     expect($genre->isActive)->toBeFalsy();
 });
 
-test('should update a genre', function () {
+it('should update a genre', function () {
     expect($this->genre->name)->toBe('test');
     $this->genre->update(
         name: 'updated name',
@@ -98,8 +98,24 @@ test('should update a genre', function () {
     expect($this->genre->name)->toBe('updated name');
 });
 
-test('should throw exception if update with invalid value', function () {
+it('should throw exception if update with invalid value', function () {
     $this->genre->update(
         name: 'up',
     );
 })->throws(EntityValidationException::class);
+
+it('should throw exception if values of array is not uuid vo', function () {
+    new Genre(
+        name: 'test',
+        categoriesId: ['123']
+    );
+})->throws(InvalidArgumentException::class);
+
+it('should pass when use values array equal vo uuid', function () {
+    $genre = new Genre(
+        name: 'test',
+        categoriesId: [Uuid::random()]
+    );
+
+    expect(count($genre->categoriesId))->toBe(1);
+});

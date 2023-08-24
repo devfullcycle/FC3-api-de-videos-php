@@ -59,5 +59,6 @@ class Genre
     {
         DomainValidation::strMinLength($this->name);
         DomainValidation::strMaxLength($this->name);
+        DomainValidation::arrayTypeItemsUuid($this->categoriesId);
     }
 }
