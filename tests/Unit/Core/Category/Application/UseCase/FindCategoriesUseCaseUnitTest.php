@@ -20,14 +20,14 @@ test('unit test get categories', function () {
         ),
     ];
 
-    $mockRepository = Mockery::mock(stdClass::class, CategoryRepositoryInterface::class);
-    $mockRepository->shouldReceive('findAll')
+    $this->mockRepository = Mockery::mock(stdClass::class, CategoryRepositoryInterface::class);
+    $this->mockRepository->shouldReceive('findAll')
         ->times(1)
         ->with($inputDto->filter)
         ->andReturn($responseRepository);
 
     $useCase = new FindCategoriesUseCase(
-        repository: $mockRepository,
+        repository: $this->mockRepository,
     );
     $response = $useCase->execute(
         input: $inputDto,
