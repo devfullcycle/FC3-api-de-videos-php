@@ -119,3 +119,24 @@ it('should pass when use values array equal vo uuid', function () {
 
     expect(count($genre->categoriesId))->toBe(1);
 });
+
+it('add category', function () {
+    expect(count($this->genre->categoriesId))->toBe(0);
+
+    $categoryId = (string) Uuid::random();
+    $this->genre->addCategory($categoryId);
+
+    expect(count($this->genre->categoriesId))->toBe(1);
+});
+
+it('remove category', function () {
+    $categoryId = (string) Uuid::random();
+    $genre = new Genre(
+        name: 'test',
+        categoriesId: [$categoryId]
+    );
+    expect(count($genre->categoriesId))->toBe(1);
+
+    $genre->removeCategory($categoryId);
+    expect(count($genre->categoriesId))->toBe(0);
+});
