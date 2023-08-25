@@ -77,6 +77,8 @@ return [
             'query' => [
                 'categories' => \App\GraphQL\Query\CategoriesQuery::class,
                 'category' => \App\GraphQL\Query\CategoryQuery::class,
+                'genres' => \App\GraphQL\Query\Genres\GenresQuery::class,
+                'genre' => \App\GraphQL\Query\Genres\GenreQuery::class,
             ],
             'mutation' => [
                 // ExampleMutation::class,
@@ -84,6 +86,7 @@ return [
             // The types only available in this schema
             'types' => [
                 'Category' => \App\GraphQL\Types\CategoryType::class,
+                'Genre' => \App\GraphQL\Types\GenreType::class,
             ],
 
             // Laravel HTTP middleware
