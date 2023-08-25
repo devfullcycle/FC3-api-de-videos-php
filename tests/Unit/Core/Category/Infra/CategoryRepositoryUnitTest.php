@@ -2,7 +2,7 @@
 
 use Core\Category\Domain\Entities\Category;
 use Core\Category\Infra\CategoryRepository;
-use Core\Category\Infra\Contracts\ElasticClientInterface;
+use Core\SeedWork\Infra\Contracts\ElasticClientInterface;
 use Core\SeedWork\Domain\Exceptions\EntityNotFoundException;
 
 test('findAll', function () {

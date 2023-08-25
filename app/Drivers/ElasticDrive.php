@@ -2,7 +2,7 @@
 
 namespace App\Drivers;
 
-use Core\Category\Infra\Contracts\ElasticClientInterface;
+use Core\SeedWork\Infra\Contracts\ElasticClientInterface;
 use Elasticsearch\Client;
 use Elasticsearch\ClientBuilder;
 

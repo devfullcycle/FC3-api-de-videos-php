@@ -4,7 +4,7 @@ namespace Core\Category\Infra;
 
 use Core\Category\Domain\Entities\Category;
 use Core\Category\Domain\Repository\CategoryRepositoryInterface;
-use Core\Category\Infra\Contracts\ElasticClientInterface;
+use Core\SeedWork\Infra\Contracts\ElasticClientInterface;
 use Core\SeedWork\Domain\Exceptions\EntityNotFoundException;
 use Core\SeedWork\Domain\ValueObjects\Uuid;
 use DateTime;

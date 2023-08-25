@@ -5,7 +5,7 @@ namespace App\Providers;
 use App\Drivers\ElasticDrive;
 use Core\Category\Domain\Repository\CategoryRepositoryInterface;
 use Core\Category\Infra\CategoryRepository;
-use Core\Category\Infra\Contracts\ElasticClientInterface;
+use Core\SeedWork\Infra\Contracts\ElasticClientInterface;
 use Core\Genre\Domain\Repository\GenreRepositoryInterface;
 use Core\Genre\Infra\GenreRepository;
 use Illuminate\Support\ServiceProvider;

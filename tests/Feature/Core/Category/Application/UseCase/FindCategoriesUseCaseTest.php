@@ -3,7 +3,7 @@
 use Core\Category\Application\DTO\InputCategoriesDTO;
 use Core\Category\Application\UseCase\FindCategoriesUseCase;
 use Core\Category\Infra\CategoryRepository;
-use Core\Category\Infra\Contracts\ElasticClientInterface;
+use Core\SeedWork\Infra\Contracts\ElasticClientInterface;
 
 test('FindCategoriesUseCase', function (array $response, int $totalResponse = 0) {
     $stubElastic = new class($response) implements ElasticClientInterface

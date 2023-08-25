@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Stubs;
 
-use Core\Category\Infra\Contracts\ElasticClientInterface;
+use Core\SeedWork\Infra\Contracts\ElasticClientInterface;
 
 class ElasticSearchStub implements ElasticClientInterface
 {

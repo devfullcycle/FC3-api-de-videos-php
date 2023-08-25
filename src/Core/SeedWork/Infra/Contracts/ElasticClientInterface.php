@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Category\Infra\Contracts;
+namespace Core\SeedWork\Infra\Contracts;
 
 interface ElasticClientInterface
 {

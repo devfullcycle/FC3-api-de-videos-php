@@ -2,7 +2,7 @@
 
 use Core\Genre\Domain\Entities\Genre;
 use Core\Genre\Infra\GenreRepository;
-use Core\Category\Infra\Contracts\ElasticClientInterface;
+use Core\SeedWork\Infra\Contracts\ElasticClientInterface;
 use Core\SeedWork\Domain\Exceptions\EntityNotFoundException;
 
 test('findAll', function () {

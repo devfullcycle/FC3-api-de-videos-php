@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use Core\Category\Infra\Contracts\ElasticClientInterface;
+use Core\SeedWork\Infra\Contracts\ElasticClientInterface;
 use Illuminate\Console\Command;
 
 class ExportDataElasticSearch extends Command
