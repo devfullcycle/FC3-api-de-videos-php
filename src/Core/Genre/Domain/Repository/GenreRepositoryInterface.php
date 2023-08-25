@@ -6,7 +6,10 @@ use Core\Genre\Domain\Entities\Genre;
 
 interface GenreRepositoryInterface
 {
-    public function findOne(string $id): Genre;
+    /**
+     * @return object Genre
+     */
+    public function findOne(string $id): object;
 
     /**
      * @return array<Genre>

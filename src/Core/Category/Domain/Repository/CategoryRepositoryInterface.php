@@ -6,7 +6,10 @@ use Core\Category\Domain\Entities\Category;
 
 interface CategoryRepositoryInterface
 {
-    public function findOne(string $id): Category;
+    /**
+     * @return object Category
+     */
+    public function findOne(string $id): object;
 
     /**
      * @return array<Category>
