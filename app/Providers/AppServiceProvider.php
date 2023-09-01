@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Drivers\ElasticDrive;
+use Core\CastMember\Domain\Repository\CastMemberRepositoryInterface;
+use Core\CastMember\Infra\CastMemberRepository;
 use Core\Category\Domain\Repository\CategoryRepositoryInterface;
 use Core\Category\Infra\CategoryRepository;
 use Core\SeedWork\Infra\Contracts\ElasticClientInterface;
@@ -43,6 +45,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(
             GenreRepositoryInterface::class,
             GenreRepository::class
+        );
+
+        $this->app->singleton(
+            CastMemberRepositoryInterface::class,
+            CastMemberRepository::class
         );
     }
 
