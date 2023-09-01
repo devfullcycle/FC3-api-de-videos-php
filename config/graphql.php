@@ -79,6 +79,8 @@ return [
                 'category' => \App\GraphQL\Query\CategoryQuery::class,
                 'genres' => \App\GraphQL\Query\Genres\GenresQuery::class,
                 'genre' => \App\GraphQL\Query\Genres\GenreQuery::class,
+                'cast_members' => \App\GraphQL\Query\CastMembers\CastMembersQuery::class,
+                'cast_member' => \App\GraphQL\Query\CastMembers\CastMemberQuery::class,
             ],
             'mutation' => [
                 // ExampleMutation::class,
@@ -87,6 +89,7 @@ return [
             'types' => [
                 'Category' => \App\GraphQL\Types\CategoryType::class,
                 'Genre' => \App\GraphQL\Types\GenreType::class,
+                'CastMember' => \App\GraphQL\Types\CastMemberType::class,
             ],
 
             // Laravel HTTP middleware
