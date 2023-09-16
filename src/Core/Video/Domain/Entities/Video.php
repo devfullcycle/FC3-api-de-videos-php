@@ -68,4 +68,29 @@ class Video
     {
         unset($this->castMembersIds[array_search($castMemberId, $this->castMembersIds)]);
     }
+
+    public function addThumbFile(Image $thumbFile): void
+    {
+        $this->thumbFile = $thumbFile;
+    }
+
+    public function addThumbHalf(Image $thumbHalf): void
+    {
+        $this->thumbHalf = $thumbHalf;
+    }
+
+    public function addBannerFile(Image $bannerFile): void
+    {
+        $this->bannerFile = $bannerFile;
+    }
+
+    public function addTrailerFile(Media $trailerFile): void
+    {
+        $this->trailerFile = $trailerFile;
+    }
+
+    public function addVideoFile(Media $videoFile): void
+    {
+        $this->videoFile = $videoFile;
+    }
 }
