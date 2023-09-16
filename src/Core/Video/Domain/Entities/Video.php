@@ -13,6 +13,10 @@ class Video
 {
     use MethodsMagicsTrait;
 
+    protected array $categoriesIds = [];
+    protected array $genresIds = [];
+    protected array $castMembersIds = [];
+
     public function __construct(
         protected string $title,
         protected string $description,
@@ -33,5 +37,35 @@ class Video
         $this->createdAt = $this->createdAt ?? new DateTime();
 
         // validation
+    }
+
+    public function addCategoryId(string $categoryId): void
+    {
+        array_push($this->categoriesIds, $categoryId);
+    }
+
+    public function addGenreId(string $genreId): void
+    {
+        array_push($this->genresIds, $genreId);
+    }
+
+    public function addCastMemberId(string $castMembersIds): void
+    {
+        array_push($this->castMembersIds, $castMembersIds);
+    }
+
+    public function removeCategoryId(string $categoryId): void
+    {
+        unset($this->categoriesIds[array_search($categoryId, $this->categoriesIds)]);
+    }
+
+    public function removeGenreId(string $genreId): void
+    {
+        unset($this->genresIds[array_search($genreId, $this->genresIds)]);
+    }
+
+    public function removeCastMemberId(string $castMemberId): void
+    {
+        unset($this->castMembersIds[array_search($castMemberId, $this->castMembersIds)]);
     }
 }
