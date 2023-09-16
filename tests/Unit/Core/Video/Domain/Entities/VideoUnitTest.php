@@ -16,6 +16,9 @@ beforeEach(fn () => $this->video = new Video(
 
 it('constructor properties', function () {
     expect($this->video)->toHaveProperties([
+        'categoriesIds',
+        'genresIds',
+        'castMembersIds',
         'title',
         'description',
         'yearLaunched',
@@ -59,4 +62,40 @@ it('video getters', function () {
     expect($this->video->bannerFile)->toBeNull();
     expect($this->video->trailerFile)->toBeNull();
     expect($this->video->videoFile)->toBeNull();
+    expect($this->video->categoriesIds)->toBeArray();
+    expect($this->video->genresIds)->toBeArray();
+    expect($this->video->castMembersIds)->toBeArray();
+});
+
+it('add and remove category id', function () {
+    $categoryId = Uuid::random();
+    $categoryId2 = Uuid::random();
+    expect(count($this->video->categoriesIds))->toBe(0);
+    $this->video->addCategoryId($categoryId);
+    $this->video->addCategoryId($categoryId2);
+    expect(count($this->video->categoriesIds))->toBe(2);
+    $this->video->removeCategoryId($categoryId);
+    expect(count($this->video->categoriesIds))->toBe(1);
+});
+
+it('add and remove genres id', function () {
+    $genreId = Uuid::random();
+    $genreId2 = Uuid::random();
+    expect(count($this->video->genresIds))->toBe(0);
+    $this->video->addGenreId($genreId);
+    $this->video->addGenreId($genreId2);
+    expect(count($this->video->genresIds))->toBe(2);
+    $this->video->removeGenreId($genreId);
+    expect(count($this->video->genresIds))->toBe(1);
+});
+
+it('add and remove cast_members id', function () {
+    $castMember = Uuid::random();
+    $castMember2 = Uuid::random();
+    expect(count($this->video->castMembersIds))->toBe(0);
+    $this->video->addCastMemberId($castMember);
+    $this->video->addCastMemberId($castMember2);
+    expect(count($this->video->castMembersIds))->toBe(2);
+    $this->video->removeCastMemberId($castMember);
+    expect(count($this->video->castMembersIds))->toBe(1);
 });
