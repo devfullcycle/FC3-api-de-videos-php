@@ -93,4 +93,24 @@ class Video
     {
         $this->videoFile = $videoFile;
     }
+
+    public function toClose(): void
+    {
+        $this->opened = false;
+    }
+
+    public function open(): void
+    {
+        $this->opened = true;
+    }
+
+    public function publish(): void
+    {
+        $this->published = true;
+    }
+
+    public function unPublish(): void
+    {
+        $this->published = false;
+    }
 }

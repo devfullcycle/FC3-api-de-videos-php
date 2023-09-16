@@ -154,3 +154,19 @@ it('add media video in video', function () {
     expect($this->video->videoFile->mediaStatus)->toBe(MediaStatus::PENDING);
     expect($this->video->videoFile->encodedPath)->toBe('path/video.ogg');
 });
+
+it('should open and to close - opened', function () {
+    expect($this->video->opened)->toBeTrue();
+    $this->video->toClose();
+    expect($this->video->opened)->toBeFalse();
+    $this->video->open();
+    expect($this->video->opened)->toBeTrue();
+});
+
+it('should published and unpublished', function () {
+    expect($this->video->published)->toBeFalse();
+    $this->video->publish();
+    expect($this->video->published)->toBeTrue();
+    $this->video->unPublish();
+    expect($this->video->published)->toBeFalse();
+});
