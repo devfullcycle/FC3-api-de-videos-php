@@ -2,8 +2,10 @@
 
 use Core\SeedWork\Domain\ValueObjects\Uuid;
 use Core\Video\Domain\Entities\Video;
+use Core\Video\Domain\Enums\MediaStatus;
 use Core\Video\Domain\Enums\Rating;
 use Core\Video\Domain\ValueObjects\Image;
+use Core\Video\Domain\ValueObjects\Media;
 
 beforeEach(fn () => $this->video = new Video(
     title: 'title',
@@ -98,4 +100,57 @@ it('add and remove cast_members id', function () {
     expect(count($this->video->castMembersIds))->toBe(2);
     $this->video->removeCastMemberId($castMember);
     expect(count($this->video->castMembersIds))->toBe(1);
+});
+
+it('add thumb in video', function () {
+    expect($this->video->thumbFile)->toBe(null);
+    $this->video->addThumbFile(thumbFile: new Image(
+        path: 'path/image.png'
+    ));
+    expect($this->video->thumbFile)->toBeInstanceOf(Image::class);
+    expect($this->video->thumbFile->path())->toBe('path/image.png');
+});
+
+it('add thumb half in video', function () {
+    expect($this->video->thumbHalf)->toBe(null);
+    $this->video->addThumbHalf(thumbHalf: new Image(
+        path: 'path/image.png'
+    ));
+    expect($this->video->thumbHalf)->toBeInstanceOf(Image::class);
+    expect($this->video->thumbHalf->path())->toBe('path/image.png');
+});
+
+it('add banner in video', function () {
+    expect($this->video->bannerFile)->toBe(null);
+    $this->video->addBannerFile(bannerFile: new Image(
+        path: 'path/image.png'
+    ));
+    expect($this->video->bannerFile)->toBeInstanceOf(Image::class);
+    expect($this->video->bannerFile->path())->toBe('path/image.png');
+});
+
+it('add media trailer in video', function () {
+    expect($this->video->trailerFile)->toBe(null);
+    $this->video->addTrailerFile(trailerFile: new Media(
+        filePath: 'path/video.mp4',
+        mediaStatus: MediaStatus::COMPLETE,
+        encodedPath: 'path/video.ogg',
+    ));
+    expect($this->video->trailerFile)->toBeInstanceOf(Media::class);
+    expect($this->video->trailerFile->filePath)->toBe('path/video.mp4');
+    expect($this->video->trailerFile->mediaStatus)->toBe(MediaStatus::COMPLETE);
+    expect($this->video->trailerFile->encodedPath)->toBe('path/video.ogg');
+});
+
+it('add media video in video', function () {
+    expect($this->video->videoFile)->toBe(null);
+    $this->video->addVideoFile(videoFile: new Media(
+        filePath: 'path/video.mp4',
+        mediaStatus: MediaStatus::PENDING,
+        encodedPath: 'path/video.ogg',
+    ));
+    expect($this->video->videoFile)->toBeInstanceOf(Media::class);
+    expect($this->video->videoFile->filePath)->toBe('path/video.mp4');
+    expect($this->video->videoFile->mediaStatus)->toBe(MediaStatus::PENDING);
+    expect($this->video->videoFile->encodedPath)->toBe('path/video.ogg');
 });
