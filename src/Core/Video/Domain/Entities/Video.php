@@ -2,6 +2,7 @@
 
 namespace Core\Video\Domain\Entities;
 
+use Core\SeedWork\Domain\Traits\MethodsMagicsTrait;
 use Core\SeedWork\Domain\ValueObjects\Uuid;
 use Core\Video\Domain\Enums\Rating;
 use Core\Video\Domain\ValueObjects\Image;
@@ -10,6 +11,8 @@ use DateTime;
 
 class Video
 {
+    use MethodsMagicsTrait;
+
     public function __construct(
         protected string $title,
         protected string $description,
