@@ -81,6 +81,8 @@ return [
                 'genre' => \App\GraphQL\Query\Genres\GenreQuery::class,
                 'cast_members' => \App\GraphQL\Query\CastMembers\CastMembersQuery::class,
                 'cast_member' => \App\GraphQL\Query\CastMembers\CastMemberQuery::class,
+                'videos' => \App\GraphQL\Query\Videos\VideosQuery::class,
+                'video' => \App\GraphQL\Query\Videos\VideoQuery::class,
             ],
             'mutation' => [
                 // ExampleMutation::class,
@@ -90,6 +92,7 @@ return [
                 'Category' => \App\GraphQL\Types\CategoryType::class,
                 'Genre' => \App\GraphQL\Types\GenreType::class,
                 'CastMember' => \App\GraphQL\Types\CastMemberType::class,
+                'Video' => \App\GraphQL\Types\VideoType::class,
             ],
 
             // Laravel HTTP middleware
