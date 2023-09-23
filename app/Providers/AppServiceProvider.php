@@ -10,6 +10,8 @@ use Core\Category\Infra\CategoryRepository;
 use Core\SeedWork\Infra\Contracts\ElasticClientInterface;
 use Core\Genre\Domain\Repository\GenreRepositoryInterface;
 use Core\Genre\Infra\GenreRepository;
+use Core\Video\Domain\Repository\VideoRepositoryInterface;
+use Core\Video\Infra\VideoRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -50,6 +52,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(
             CastMemberRepositoryInterface::class,
             CastMemberRepository::class
+        );
+
+        $this->app->singleton(
+            VideoRepositoryInterface::class,
+            VideoRepository::class
         );
     }
 
