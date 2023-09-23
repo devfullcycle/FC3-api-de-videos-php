@@ -3,9 +3,14 @@
 use App\Http\Controllers\Api\{
     CastMemberApiController,
     CategoryApiController,
-    GenreApiController
+    GenreApiController,
+    VideoApiController
 };
 use Illuminate\Support\Facades\Route;
+
+Route::get('/videos', [VideoApiController::class, 'index']);
+Route::get('/videos/{video}', [VideoApiController::class, 'show']);
+
 
 Route::get('/categories', [CategoryApiController::class, 'index']);
 Route::get('/categories/{category}', [CategoryApiController::class, 'show']);
