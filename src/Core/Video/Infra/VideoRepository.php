@@ -73,7 +73,7 @@ class VideoRepository implements VideoRepositoryInterface
             opened: (bool) $data['opened'],
             rating: Rating::from($data['rating']),
             id: new Uuid($data['id']),
-            published: (bool) $data['published'],
+            published: $data['published'] ?? false,
             createdAt: new DateTime($data['created_at']),
         );
     }
