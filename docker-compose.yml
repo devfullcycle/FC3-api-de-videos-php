@@ -32,3 +32,51 @@ services:
         image: redis:latest
         extra_hosts:
             - "host.docker.internal:172.17.0.1"
+
+    elasticsearch:
+        image: elasticsearch:7.16.2
+        container_name: elasticsearch
+        restart: always
+        volumes:
+            - elastic_data:/usr/share/elasticsearch/data/
+        environment:
+            ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+            discovery.type: single-node
+        ports:
+            - "9200:9200"
+            - "9300:9300"
+        extra_hosts:
+                - "host.docker.internal:172.17.0.1"
+
+    logstash:
+        image: logstash:7.16.2
+        container_name: logstash
+        restart: always
+        volumes:
+            - ./logstash/:/logstash_dir
+        command: logstash -f /logstash_dir/logstash.conf
+        depends_on:
+            - elasticsearch
+        ports:
+            - "9600:9600"
+            - "4718:4718/udp"
+        environment:
+            LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+        extra_hosts:
+            - "host.docker.internal:172.17.0.1"
+
+    kibana:
+        image: kibana:7.16.2
+        container_name: kibana
+        restart: always
+        ports:
+            - "5601:5601"
+        environment:
+            - ELASTICSEARCH_URL=http://elasticsearch:9200
+        depends_on:
+            - elasticsearch
+        extra_hosts:
+            - "host.docker.internal:172.17.0.1"
+
+volumes:
+    elastic_data: {}

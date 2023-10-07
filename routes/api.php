@@ -21,4 +21,4 @@ Route::get('/genres/{genre}', [GenreApiController::class, 'show']);
 Route::get('/cast_members', [CastMemberApiController::class, 'index']);
 Route::get('/cast_members/{genre}', [CastMemberApiController::class, 'show']);
 
-Route::get('/', fn () => response()->json(['message' => 'success']));
+Route::get('/', fn () => \Log::debug('debug', []));

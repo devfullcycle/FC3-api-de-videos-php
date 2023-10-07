@@ -53,8 +53,15 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            'channels' => ['daily', 'logstash'],
             'ignore_exceptions' => false,
+        ],
+
+        'logstash' => [
+            'driver' => 'custom',
+            'via' => \App\Services\Logger\LogstashLogger::class,
+            'host' => env('LOGSTASH_HOST', 'logstash'),
+            'port' => env('LOGSTASH_PORT', 4718),
         ],
 
         'single' => [
