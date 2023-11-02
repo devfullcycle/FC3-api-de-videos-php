@@ -12,8 +12,8 @@ services:
             - ./:/var/www
         depends_on:
             - redis
-        extra_hosts:
-            - "host.docker.internal:172.17.0.1"
+        networks:
+            - fullcycle
 
     # nginx
     nginx:
@@ -24,11 +24,16 @@ services:
         volumes:
             - ./:/var/www
             - ./docker/nginx/:/etc/nginx/conf.d/
-        extra_hosts:
-            - "host.docker.internal:172.17.0.1"
+        networks:
+            - fullcycle
 
     # redis
     redis:
         image: redis:latest
-        extra_hosts:
-            - "host.docker.internal:172.17.0.1"
+        networks:
+            - fullcycle
+
+networks:
+    fullcycle:
+        external: true
+        driver: bridge
