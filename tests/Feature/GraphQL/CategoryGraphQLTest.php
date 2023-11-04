@@ -1,5 +1,7 @@
 <?php
 
+beforeEach(fn () => $this->withoutMiddleware());
+
 test('test e2e graphql: list all categories', function (string $valuesRequest, array $valuesExpected) {
     $response = $this->post('/graphql', [
         'query' => "{

@@ -15,7 +15,8 @@
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
         "ramsey/uuid": "^4.7",
-        "rebing/graphql-laravel": "^8.6"
+        "rebing/graphql-laravel": "^8.6",
+        "robsontenorio/laravel-keycloak-guard": "^1.4"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

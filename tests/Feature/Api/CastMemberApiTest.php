@@ -1,5 +1,7 @@
 <?php
 
+beforeEach(fn () => $this->withoutMiddleware());
+
 test('cast_member api e2e: list all cast_members', function () {
     $response = $this->getJson('/cast_members');
 

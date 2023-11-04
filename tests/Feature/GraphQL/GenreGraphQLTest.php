@@ -1,5 +1,7 @@
 <?php
 
+beforeEach(fn () => $this->withoutMiddleware());
+
 it('test e2e graphql: list all genres', function (string $valuesRequest, array $valuesExpected) {
     $response = $this->post('/graphql', [
         'query' => "{

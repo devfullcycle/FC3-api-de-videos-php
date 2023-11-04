@@ -13,7 +13,7 @@ return [
 
         // Any middleware for the graphql route group
         // This middleware will apply to all schemas
-        'middleware' => [],
+        'middleware' => ['auth:api', 'can:api-catalog-video'],
 
         // Additional route group attributes
         //

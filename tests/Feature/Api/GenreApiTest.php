@@ -1,5 +1,7 @@
 <?php
 
+beforeEach(fn () => $this->withoutMiddleware());
+
 test('genre api e2e: list all genres', function () {
     $response = $this->getJson('/genres');
 

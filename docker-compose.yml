@@ -33,6 +33,16 @@ services:
         networks:
             - fullcycle
 
+    # keycloak
+    keycloak:
+        image: jboss/keycloak:16.1.1
+        environment:
+            - KEYCLOAK_USER=admin
+            - KEYCLOAK_PASSWORD=admin
+            - DB_VENDOR=h2
+        ports:
+        - '8080:8080'
+
 networks:
     fullcycle:
         external: true

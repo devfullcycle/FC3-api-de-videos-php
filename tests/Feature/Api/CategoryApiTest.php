@@ -1,5 +1,7 @@
 <?php
 
+beforeEach(fn () => $this->withoutMiddleware());
+
 test('category api e2e: list all categories', function () {
     $response = $this->getJson('/categories');
 

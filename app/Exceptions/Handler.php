@@ -61,7 +61,7 @@ class Handler extends ExceptionHandler
             return $this->showError($e->getMessage(), Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        parent::render($request, $e);
+        return parent::render($request, $e);
     }
 
     private function showError(string $message, int $statusCode)

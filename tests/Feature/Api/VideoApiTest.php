@@ -1,5 +1,7 @@
 <?php
 
+beforeEach(fn () => $this->withoutMiddleware());
+
 test('video api e2e: list all videos', function () {
     $response = $this->getJson('/videos');
 
